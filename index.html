@@ -3,93 +3,100 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Xin Lỗi Siêu Sặc Sỡ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Coiny&display=swap" rel="stylesheet">
+  <title>Xin Lỗi Em</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      background: linear-gradient(135deg, #ff00cc, #3333ff, #00ffcc, #ffff00);
-      background-size: 600% 600%;
-      animation: rainbow 10s linear infinite;
-      font-family: 'Coiny', cursive;
+      padding: 0;
+      font-family: 'Great Vibes', cursive;
+      background: url('https://i.pinimg.com/originals/9e/3f/8e/9e3f8e5e4d805c0c1919b67693dd6df3.gif') center/cover no-repeat fixed;
       color: white;
       text-align: center;
-      padding: 50px 20px;
-      overflow-x: hidden;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
     }
 
-    @keyframes rainbow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .overlay {
+      background: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      top: 30%;
+      transform: translateY(-30%);
     }
 
     h1 {
       font-size: 4rem;
-      text-shadow: 3px 3px 5px black;
-      animation: pop 2s ease-in-out infinite alternate;
+      margin-bottom: 20px;
+      color: #ffb6c1;
+      text-shadow: 2px 2px 5px black;
     }
 
-    @keyframes pop {
-      from { transform: scale(1); }
-      to { transform: scale(1.1) rotate(2deg); }
+    p {
+      font-size: 2rem;
+      padding: 0 30px;
+      text-shadow: 1px 1px 3px black;
     }
 
     .heart {
-      font-size: 3rem;
-      animation: pulse 1s infinite;
-      display: inline-block;
-      margin: 20px;
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center;
+      background-size: contain;
+      animation: fall 5s linear infinite;
+      opacity: 0.7;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); color: red; }
-      50% { transform: scale(1.5); color: hotpink; }
-      100% { transform: scale(1); color: red; }
+    @keyframes fall {
+      0% {
+        top: -50px;
+        left: calc(100% * var(--i));
+        transform: rotate(0deg);
+      }
+      100% {
+        top: 100%;
+        left: calc(100% * var(--i));
+        transform: rotate(360deg);
+      }
     }
 
-    .message {
-      font-size: 2rem;
-      background: rgba(0, 0, 0, 0.3);
-      display: inline-block;
-      padding: 20px;
-      border-radius: 20px;
-      border: 4px dashed white;
-      margin-top: 30px;
-      animation: wiggle 3s infinite;
-    }
-
-    @keyframes wiggle {
-      0% { transform: rotate(-2deg); }
-      50% { transform: rotate(2deg); }
-      100% { transform: rotate(-2deg); }
-    }
-
-    .rainbow-bar {
-      height: 20px;
-      background: repeating-linear-gradient(
-        45deg,
-        red, orange 20px, yellow 40px, green 60px, blue 80px, purple 100px
-      );
-      animation: slide 2s linear infinite;
-      margin-top: 50px;
-    }
-
-    @keyframes slide {
-      0% { background-position: 0 0; }
-      100% { background-position: 100px 0; }
+    audio {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>😢 XIN LỖI 😢</h1>
-  <div class="heart">💖</div>
-  <div class="heart">💔</div>
-  <div class="heart">💗</div>
-  <div class="message">
-    <br/>
-    Anh xin lỗi.... 
+  <div class="overlay"></div>
+  <div class="content">
+    <h1>Xin Lỗi Em...</h1>
+    <p>Anh biết mình sai rồi 😢<br>  
+    Mỗi ngày không có em... là một ngày vô nghĩa 🥀<br>  
+    Tha lỗi cho anh, được không? 🥺</p>
   </div>
-  <div class="rainbow-bar"></div>
+
+  <!-- Nhạc nền đau khổ -->
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Hiệu ứng trái tim rơi -->
+  <script>
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.setProperty('--i', Math.random());
+      heart.style.left = `${Math.random() * 100}%`;
+      heart.style.animationDuration = `${3 + Math.random() * 4}s`;
+      document.body.appendChild(heart);
+    }
+  </script>
 </body>
 </html>
